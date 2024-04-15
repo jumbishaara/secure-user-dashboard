@@ -5,7 +5,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <button onClick={onClose} className="absolute top-2 right-2">
           Close
         </button>
-        {children}
+        {/* {children} */}
       </div>
     </div>
   );
