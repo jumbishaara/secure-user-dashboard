@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { FormEvent, ReactNode } from 'react';
 
 interface FormProps {
-  onSubmit: (formData: any) => void;
+  onSubmit: (formData: FormDataValues) => void;
+  children: ReactNode;
+}
+
+interface FormDataValues {
+  [key: string]: string | File | FileList | null;
 }
 
 const Form: React.FC<FormProps> = ({ onSubmit, children }) => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data: any = {};
+    const formData = new FormData(e.currentTarget);
+    const data: FormDataValues = {};
+
     formData.forEach((value, key) => {
-      data[key] = value;
+      data[key] = value as string | File | FileList | null;
     });
+
     onSubmit(data);
   };
 
